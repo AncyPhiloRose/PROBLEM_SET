@@ -1,0 +1,37 @@
+1)Select the Employee with the top three salaries
+SELECT DISTINCT SALARY 
+FROM EMPLOYEE a 
+WHERE 3 >= (SELECT COUNT(DISTINCT SALARY ) 
+FROM EMPLOYEE b 
+WHERE b.SALARY  >= a.SALARY ) 
+ORDER BY a.SALARY ;
+
+2)Select the Employee with the least salary
+SELECT MIN(SALARY) FROM EMPLOYEE;
+
+3)Select the Employee who does not have a manager in the department table
+SELECT E_ID FROM EMPLOYEE ON DEPT.DEP_ID=EMPLOYEE.DEPT_ID WHERE MANAGER IS NULL;
+  
+4)Select the Employee who is also a Manager
+SELECT E_ID FROM EMPLOYEE WHERE MANAGER_ID IN (SELECT MANAGER_ID FROM EMPLOYEE)
+
+5)Select the Empolyee who is a Manager and has least salarY
+SELECT E_ID FROM EMPLOYEE WHERE MANAGER_ID IN(SELECT MANAGER_ID FROM EMPLOYEE WHERE MIN(MANAGER_ID));
+
+6)Select the total number of Employees in Communications departments
+SELECT COUNT(E_ID) FROM DEPT GROUP BY E_ID;
+
+7)Select the Employee in Finance Department who has the top salary
+SELECT * FROM EMPLOYEE WHERE SALARY IN (SELECT MAX(SALARY) FROM EMPLOYEE 
+WHERE DEP_ID IN (SELECT d.DEP_ID FROM DEPT d WHERE DEP_NAME = 'Finance'));
+
+8)Select the Employee in product depatment who has the least salary
+SELECT * FROM EMPLOYEE WHERE SALARY IN (SELECT MIN(SALARY) FROM EMPLOYEE 
+WHERE DEP_ID IN (SELECT d.DEP_ID FROM DEPT d WHERE DEP_NAME = 'Product'));
+
+
+9)Select the count of Empolyees in Health with maximum salary
+SELECT COUNT(EMP_ID) FROM EMPLOYEE ON DEP.DEP_ID=EMPLOYEE_ID WHERE MAX(SALARY) IN 'HEALTH';
+
+10)Select the Employees who report to Natasha Stevens
+SELECT * FROM DEP WHERE 'NATASHA STEVENS'IN DEP_MANAGER;
