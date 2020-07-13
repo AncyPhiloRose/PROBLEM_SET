@@ -1,0 +1,87 @@
+CREATE TABLE MOVIE(MID,TITLE,YEAR,DIRECTOR);
+
+INSERT INTO MOVIE VALUES(101, 'Gone with the Wind', 1939, 'Victor Fleming');
+INSERT INTO MOVIE VALUES(102, 'Star Wars', 1977 ,'George Lucas');
+INSERT INTO MOVIE VALUES(103,'The Sound of Music',1965, 'Robert Wise');
+INSERT INTO MOVIE VALUES(104, 'E.T',1982,'Steven Spielberg');
+INSERT INTO MOVIE VALUES(105,'Titanic', 1997, 'James Cameron');
+INSERT INTO MOVIE VALUES(106,'Snow White', 1937 ,<null>);
+INSERT INTO MOVIE VALUES(107,'Avatar', 2009 ,'James Cameron');
+INSERT INTO MOVIE VALUES(108,'Raiders of the Lost Ark', 1981, 'Steven Spielberg');
+
+
+CREATE TABLE REVIEWER(rID,name);
+
+INSERT INTO REVIEWER VALUES( 201,'Sarah Martinez');
+INSERT INTO REVIEWER VALUES (202, 'Daniel Lewis');
+INSERT INTO REVIEWER VALUES(203,'Brittany Harris');
+INSERT INTO REVIEWER VALUES (204,' Mike Anderson');
+INSERT INTO REVIEWER VALUES(205,' Chris Jackson');
+INSERT INTO REVIEWER VALUES(206,'Elizabeth Thomas');
+INSERT INTO REVIEWER VALUES(207, 'James Cameron');
+INSERT INTO REVIEWER VALUES (208, 'Ashley White');
+
+CREATE TABLE Rating(rID, mID ,stars ,ratingDate);
+
+INSERT INTO  Rating VALUES(201,101,2,2011-01-22);
+INSERT INTO  Rating VALUES(201,101,4,2011-01-27);
+INSERT INTO  Rating VALUES(202,106,4,<null>);
+INSERT INTO  Rating VALUES(203,103,2,2011-01-20);
+INSERT INTO  Rating VALUES(203,108,4,2011-01-12);
+INSERT INTO  Rating VALUES(203,108,2,2011-01-30);
+INSERT INTO  Rating VALUES(204,101,3, 2011-01-09);
+INSERT INTO  Rating VALUES(205,103,3, 2011-01-27);
+INSERT INTO  Rating VALUES(205,104,2, 2011-01-22)
+INSERT INTO  Rating VALUES(205,108,4,<null>);
+INSERT INTO  Rating VALUES(206,107,3,2011-01-15);
+INSERT INTO  Rating VALUES(206,106,5,2011-01-19);
+INSERT INTO  Rating VALUES(207,107,5,2011-01-20);
+INSERT INTO  Rating VALUES(208,104,3,2011-01-02);
+
+
+
+
+
+
+
+
+
+
+
+
+1)Find the titles of all movies directed by Steven Spielberg. 
+>>SELECT TITLE FROM MOVIE WHERE DIRECTOR='STEVEN SPIELBERG';
+
+2)Find all years that have a movie that received a rating of 4 or 5, and sort them in increasing order. 
+>>SELECT YEAR FROM MOVIE M JOIN RATING R ON M.MID=R.MID WHERE STARS(4 OR 5) ORDER BY YEAR;
+
+3)Find the titles of all movies that have no ratings. 
+>>SELECT MID FROM RATING WHERE RATINGDATE IS NULL;
+
+4)Some reviewers didn't provide a date with their rating.
+ Find the names of all reviewers who have ratings with a NULL value for the date.
+>>SELECT NAME FROM REVIEWER R JOIN RATING T ON R.RID=R.RID WHERE STAR IS NULL
+ 
+5)Write a query to return the ratings data in a more readable format: reviewer name, movie title, stars, and ratingDate.
+ Also, sort the data, first by reviewer name, then by movie title, and lastly by number of stars. 
+ >>>SELECT STAR FROM RATING ORDER BY NAME DESC;
+
+6)For all cases where the same reviewer rated the same movie twice and gave it a higher rating the second time,
+ return the reviewer's name and the title of the movie. 
+>>>SELECT NAME FROM REVIEWER UNION ALL SELECT TITLE FROM MOVIE;
+
+7)For each movie that has at least one rating, find the highest number of stars 
+that movie received. Return the movie title and number of stars. Sort by movie title. 
+>>>SELECT MAX(STAR),TITLE FROM RATING R JOIN MOVIE M ON R.MID=M.MID GROUP BY TILE ORDER BY TITLE;
+
+8)For each movie, return the title and the 'rating spread', that is, the difference between highest and lowest ratings 
+given to that movie. Sort by rating spread from highest to lowest, then by movie title.
+>>>SELECT TITLE,RATING(HIGHEST-LOWEST) AS STAR FROM FROM RATING R JOIN MOVIE M ON R.MID=M.MID ORDER BY TITLE DESC;
+
+9)Find the difference between the average rating of movies released before 1980 and the average rating of movies released after 1980. (Make sure to calculate the average rating for each movie, then the average of those averages for movies before 1980 and movies after. Don't just calculate the overall average rating before and after 1980.) (1 point possible)
+>>>SELECT AVG(STAR) FROM RATING WHERE RATINGDATE>=1980;
+
+
+10)Find the names of all reviewers who rated Gone with the Wind. (1 point possible)
+>>> SELECT NAME FROM REVIEWER WHERE RATINGDATE IS NULL
+

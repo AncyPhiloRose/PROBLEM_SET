@@ -1,0 +1,19 @@
+1)For every pair of students who both like each other, return the name and grade of both students. 
+
+Include each pair only once, with the two names in alphabetical order. (1 point possible)
+2)Find names and grades of students who only have friends in the same grade. Return the result sorted by grade,
+ then by name within each grade. (1 point possible)
+3)For each student A who likes a student B where the two are not friends, 
+find if they have a friend C in common (who can introduce them!). 
+For all such trios, return the name and grade of A, B, and C. (1 point possible)
+4)For every situation where student A likes student B, but student B likes a different student C,
+ return the names and grades of A, B, and C. (1 point possible)
+5)Find those students for whom all of their friends are in different grades from themselves. 
+Return the students' names and grades.(1 point possible)
+6)Find the number of students who are either friends with Cassandra or are friends of friends of Cassandra. 
+Do not count Cassandra, even though technically she is a friend of a friend.
+
+
+
+
+
